@@ -1,0 +1,16 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.o_box {
+	width: 200px;
+	height: 200px;
+	background: orange;
+}

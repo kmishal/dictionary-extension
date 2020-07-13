@@ -1,7 +1,14 @@
+const iFrame = document.createElement("iframe");
+iFrame.src = chrome.extension.getURL("dictionary-ui.html");
+
 let variableHelpers = {
 	// apiUrl: chrome.runtime.getURL("dictionary.json"),
 	apiUrl: "https://api.dictionaryapi.dev/api/v1/entries/en/",
 	getSelectedTerm: "",
+	iframePos: {
+		top: null,
+		right: null,
+	},
 };
 
 // Get the term when user dbclicks on a text
@@ -10,8 +17,35 @@ document.addEventListener("dblclick", function (e) {
 		.getSelection()
 		.toString()
 		.toLowerCase();
+	getMousePos(e);
 	getMeaning(variableHelpers.getSelectedTerm);
 });
+
+const getMousePos = function (mouseEvent) {
+	let mousePosTop = mouseEvent.clientX;
+	let mousePosLeft = mouseEvent.clientY;
+	console.log(mouseEvent);
+	variableHelpers.iframePos = {
+		top: mousePosTop,
+		left: mousePosLeft,
+	};
+};
+
+const generateUIForSunKey = function (keyData) {
+	const {iframePos} = variableHelpers;
+	const {subKeyName, subKeyData} = keyData;
+
+	console.log("/========================");
+	console.log(subKeyName);
+	for (let i = 0; i < subKeyData.length; i++) {
+		console.log(subKeyData[i].definition);
+	}
+	console.log("/========================");
+
+	iFrame.style.top = `${iframePos.top}px`;
+	iFrame.style.left = `${iframePos.right}px`;
+	document.body.insertBefore(iFrame, document.body.firstChild);
+};
 
 // Search for the term in retunr json file
 const searchMeaning = function (dataObj) {
@@ -24,11 +58,11 @@ const searchMeaning = function (dataObj) {
 		if (key == "meaning") {
 			//check for array data-type
 			Object.keys(jsonKey).map((subKey) => {
-				console.log(subKey);
 				if (Array.isArray(jsonKey[subKey])) {
-					for (let i = 0; i < jsonKey[subKey].length; i++) {
-						console.log(jsonKey[subKey][i].definition);
-					}
+					generateUIForSunKey({
+						subKeyName: subKey,
+						subKeyData: jsonKey[subKey],
+					});
 				}
 			});
 		}

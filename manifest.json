@@ -10,11 +10,12 @@
 	"content_scripts": [
 		{
 			"matches": ["*://*/*"],
-			"js": ["contentScript.js"]
+			"js": ["contentScript.js"],
+			"css": ["contentScript.css"]
 		}
 	],
 	"permissions": ["activeTab"],
-	"web_accessible_resources": ["dictionary.json"],
+	"web_accessible_resources": ["dictionary.json", "dictionary-ui.html"],
 	"browser_action": {
 		"default_icon": {
 			"32": "/dictionary.png"
