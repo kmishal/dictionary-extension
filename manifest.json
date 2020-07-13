@@ -1,0 +1,26 @@
+{
+	"name": "Dictionary Extension",
+	"version": "1.0",
+	"description": "Extension to learn about new Words",
+	"manifest_version": 2,
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": false
+	},
+	"content_scripts": [
+		{
+			"matches": ["*://*/*"],
+			"js": ["contentScript.js"]
+		}
+	],
+	"permissions": ["activeTab"],
+	"web_accessible_resources": ["dictionary.json"],
+	"browser_action": {
+		"default_icon": {
+			"32": "/dictionary.png"
+		}
+	},
+	"icons": {
+		"32": "/book.png"
+	}
+}
