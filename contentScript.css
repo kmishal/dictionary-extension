@@ -1,9 +1,65 @@
-iframe {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	width: 200px;
-	height: 200px;
+.o_box_wrap * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.o_box_wrap {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    border: 1px solid #d2c9c9;
+    outline: none;
+    background: #c5c5c5;
+    color: #000000;
+    width: 400px;
+    height: 220px;
+    padding: 10px;
+    z-index: 99999;
+}
+
+.close_pop {
+    cursor: pointer;
+    position: absolute;
+    top: 9px;
+    right: 11px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.o_box {
+    width: 100%;
+    height: 185px;
+    overflow-y: auto;
+    margin-top: 10px;
+    padding-bottom: 20px;
+}
+
+.sub-text {
+    padding: 10px;
+}
+
+.o_box_wrap h4 {
+    font-size: 16px;
+    margin-bottom: 5px;
+    text-decoration: underline;
+}
+
+.o_box_wrap ul {
+    padding: 0 15px;
+}
+
+.o_box_wrap li {
+    font-size: 14px;
+    padding: 5px;
+    line-height: 1.2;
+    list-style-position: outside;
+    list-style: disc;
+}
+
+.o_box_wrap .o_title {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px 10px 5px 10px;
+    text-transform: capitalize;
 }
