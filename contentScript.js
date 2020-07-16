@@ -12,9 +12,12 @@ let variableHelpers = {
 
 // Get the term when user dbclicks on a text
 document.addEventListener('dblclick', function (e) {
+    console.log(e.target);
+    removeContainer();
     variableHelpers.getSelectedTerm = window
         .getSelection()
         .toString()
+        .trim()
         .toLowerCase();
     getMousePos(e);
     getMeaning(variableHelpers.getSelectedTerm);
@@ -49,8 +52,8 @@ const generateFinalUIBody = function (layout) {
     parentdiv.appendChild(closeBtn);
     parentdiv.appendChild(layout);
     document.body.insertBefore(parentdiv, document.body.firstChild);
+    dicContainer = document.querySelectorAll('.o_box_wrap');
     document.querySelector('.close_pop').addEventListener('click', function () {
-        dicContainer = document.querySelectorAll('.o_box_wrap');
         console.log(dicContainer);
         removeContainer();
     });
@@ -113,9 +116,19 @@ const searchMeaning = function (dataObj, callBack) {
 
 // search for word in dictionary
 const getMeaning = function (word) {
-    fetch(`${variableHelpers.apiUrl}${word}`)
-        .then((response) => response.json())
-        .then((data) => searchMeaning({ searchTerm: word, jsonData: data[0] }));
+    try {
+        if (word) {
+            fetch(`${variableHelpers.apiUrl}${word}`)
+                .then((response) => response.json())
+                .then((data) =>
+                    searchMeaning({ searchTerm: word, jsonData: data[0] })
+                );
+        } else {
+            alert('Invalid text');
+        }
+    } catch (err) {
+        alert('Cannot find word');
+    }
 };
 
 const removeContainer = function () {
