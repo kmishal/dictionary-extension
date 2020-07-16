@@ -20,8 +20,29 @@ document.addEventListener('dblclick', function (e) {
         .trim()
         .toLowerCase();
     getMousePos(e);
+    // add loading layout
+    wrapperLayoutUi();
     getMeaning(variableHelpers.getSelectedTerm);
 });
+
+const wrapperLayoutUi = function () {
+    let html = `<div class="o_title">${variableHelpers.getSelectedTerm}</div>
+            <div class="o_close_pop">X close</div>
+            <div class="o_box">
+                <p class="o_preloader">Searching...</p>
+            </div>`;
+    let parentdiv = document.createElement('div');
+    parentdiv.classList.add('o_box_wrap');
+    parentdiv.innerHTML = html;
+    document.body.insertBefore(parentdiv, document.body.firstChild);
+    dicContainer = document.querySelectorAll('.o_box_wrap');
+    document
+        .querySelector('.o_close_pop')
+        .addEventListener('click', function () {
+            console.log(dicContainer);
+            removeContainer();
+        });
+};
 
 const getMousePos = function (mouseEvent) {
     let mousePosTop = mouseEvent.clientX;
@@ -34,34 +55,13 @@ const getMousePos = function (mouseEvent) {
 };
 
 const generateFinalUIBody = function (layout) {
-    let html = `<div class="o_box">
-            <div class="close_pop">X Close</div>
-            <div class="o_title"></div>
-            <div class="co_cont"></div>
-		</div>`;
-
-    let parentdiv = document.createElement('div');
-    let closeBtn = document.createElement('div');
-    let title = document.createElement('p');
-    title.classList.add('o_title');
-    closeBtn.classList.add('close_pop');
-    title.textContent = variableHelpers.getSelectedTerm;
-    closeBtn.textContent = 'X Close';
-    parentdiv.classList.add('o_box_wrap');
-    parentdiv.appendChild(title);
-    parentdiv.appendChild(closeBtn);
-    parentdiv.appendChild(layout);
-    document.body.insertBefore(parentdiv, document.body.firstChild);
-    dicContainer = document.querySelectorAll('.o_box_wrap');
-    document.querySelector('.close_pop').addEventListener('click', function () {
-        console.log(dicContainer);
-        removeContainer();
-    });
+    document.querySelector('.o_preloader').remove();
+    document.querySelector('.o_box').appendChild(layout);
 };
 
 const storeDefinationLayout = function (layout) {
     let cardBody = document.createElement('div');
-    cardBody.classList.add('o_box');
+    cardBody.classList.add('o_box_cont_wrap');
     for (let i = 0; i < layout.length; i++) {
         cardBody.appendChild(layout[i]);
     }
