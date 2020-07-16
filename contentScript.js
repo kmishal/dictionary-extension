@@ -12,7 +12,6 @@ let variableHelpers = {
 
 // Get the term when user dbclicks on a text
 document.addEventListener('dblclick', function (e) {
-    console.log(e.target);
     removeContainer();
     variableHelpers.getSelectedTerm = window
         .getSelection()
