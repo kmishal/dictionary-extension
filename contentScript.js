@@ -118,16 +118,27 @@ const getMeaning = function (word) {
     try {
         if (word) {
             fetch(`${variableHelpers.apiUrl}${word}`)
-                .then((response) => response.json())
-                .then((data) =>
-                    searchMeaning({ searchTerm: word, jsonData: data[0] })
-                );
+                .then(function (response) {
+                    if (response.ok) {
+                        console.log(response);
+                        return response.json();
+                    } else {
+                        document.querySelector('.o_box').innerHTML = errorUi();
+                    }
+                })
+                .then(function (data) {
+                    console.log(data);
+                    searchMeaning({ searchTerm: word, jsonData: data[0] });
+                })
+                .catch(function (err) {
+                    document.querySelector('.o_box').innerHTML = errorUi();
+                });
         } else {
-            alert('Invalid text');
+            document.querySelector('.o_box').innerHTML = errorUi(
+                'Please Double Click on text and not over empty spaces'
+            );
         }
-    } catch (err) {
-        alert('Cannot find word');
-    }
+    } catch (err) {}
 };
 
 const removeContainer = function () {
@@ -143,4 +154,11 @@ const removeContainer = function () {
     } catch (err) {
         console.log(err, 'cannot find container');
     }
+};
+
+const errorUi = function (errorText) {
+    const errorMsg = errorText
+        ? errorText
+        : 'Something went wrong.. Please try again after some time';
+    return `<p class="o_dum_text"> ${errorMsg} </p>`;
 };
