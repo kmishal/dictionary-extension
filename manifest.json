@@ -1,27 +1,26 @@
 {
-	"name": "Dictionary Extension",
-	"version": "1.0",
-	"description": "Extension to learn about new Words",
-	"manifest_version": 2,
-	"background": {
-		"scripts": ["background.js"],
-		"persistent": false
-	},
-	"content_scripts": [
-		{
-			"matches": ["*://*/*"],
-			"js": ["contentScript.js"],
-			"css": ["contentScript.css"]
-		}
-	],
-	"permissions": ["activeTab"],
-	"web_accessible_resources": ["dictionary.json", "dictionary-ui.html"],
-	"browser_action": {
-		"default_icon": {
-			"32": "/dictionary.png"
-		}
-	},
-	"icons": {
-		"32": "/book.png"
-	}
+    "name": "Dictionary Extension",
+    "version": "1.0",
+    "description": "Extension to get the meaning of the word",
+    "manifest_version": 2,
+    "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://*/*"],
+            "js": ["contentScript.js"],
+            "css": ["contentScript.css"]
+        }
+    ],
+    "permissions": ["activeTab"],
+    "browser_action": {
+        "default_icon": {
+            "32": "/dictionary.png"
+        }
+    },
+    "icons": {
+        "32": "/book.png"
+    }
 }
