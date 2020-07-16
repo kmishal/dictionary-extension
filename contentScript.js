@@ -39,7 +39,6 @@ const wrapperLayoutUi = function () {
     document
         .querySelector('.o_close_pop')
         .addEventListener('click', function () {
-            console.log(dicContainer);
             removeContainer();
         });
 };
