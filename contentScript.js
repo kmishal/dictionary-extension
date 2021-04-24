@@ -10,7 +10,7 @@ let variableHelpers = {
     subData: [],
 };
 
-let showDictionaryContainer = (valueToSearch) => {
+let showDictionaryContainer = () => {
     removeContainer();
     // getMousePos(e);
     // add loading layout
@@ -25,7 +25,7 @@ document.addEventListener('dblclick', function (e) {
         .toString()
         .trim()
         .toLowerCase();
-    showDictionaryContainer(variableHelpers.getSelectedTerm);
+    showDictionaryContainer();
 });
 
 const wrapperLayoutUi = function () {
@@ -184,7 +184,7 @@ const searchBarUi = function () {
             ].value.trim();
             variableHelpers.getSelectedTerm = searchInputValue;
             // Load Ui layout cotainer
-            showDictionaryContainer(variableHelpers.getSelectedTerm);
+            showDictionaryContainer();
             // Empty layout input
             e.target['dic_serachbar_element'].value = '';
         });
