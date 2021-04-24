@@ -7,7 +7,7 @@
 
 .o_box_wrap {
     position: fixed;
-    left: 0;
+    left: 10px;
     bottom: 0;
     border: 1px solid #d2c9c9;
     outline: none;
@@ -85,4 +85,32 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.dic_searchbar_wrap {
+    position: fixed;
+    bottom: 0px;
+    left: 10px;
+    width: 400px;
+    background: rgb(255, 255, 112);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.dic_searchbar_wrap .dic_serachbar_element {
+    width: 100%;
+    height: 40px;
+    background: #ffffff;
+    border: 1px solid #8e8e8e;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000000;
+}
+
+.dic_searchbar_wrap .dic_serachbar_element:focus {
+    border-color: #1e7f9d;
+    box-shadow: 1px 1px 1px #1e7f9d;
+    outline: 0;
 }

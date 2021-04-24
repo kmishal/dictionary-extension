@@ -10,18 +10,22 @@ let variableHelpers = {
     subData: [],
 };
 
+let showDictionaryContainer = (valueToSearch) => {
+    removeContainer();
+    // getMousePos(e);
+    // add loading layout
+    wrapperLayoutUi();
+    getMeaning(variableHelpers.getSelectedTerm);
+};
+
 // Get the term when user dbclicks on a text
 document.addEventListener('dblclick', function (e) {
-    removeContainer();
     variableHelpers.getSelectedTerm = window
         .getSelection()
         .toString()
         .trim()
         .toLowerCase();
-    getMousePos(e);
-    // add loading layout
-    wrapperLayoutUi();
-    getMeaning(variableHelpers.getSelectedTerm);
+    showDictionaryContainer(variableHelpers.getSelectedTerm);
 });
 
 const wrapperLayoutUi = function () {
@@ -85,7 +89,7 @@ const generateUIForSunKey = function (keyData, callBack) {
     }
     console.log('/========================');
     variableHelpers.subData.push(wordDefinationLayout);
-    console.log(variableHelpers);
+    // console.log(variableHelpers);
 };
 
 // Search for the term in retunr json file
@@ -161,3 +165,29 @@ const errorUi = function (errorText) {
         : 'Something went wrong.. Please try again after some time';
     return `<p class="o_dum_text"> ${errorMsg} </p>`;
 };
+
+// Show default UI to front end
+const searchBarUi = function () {
+    let searchBarBody = `<form><input type="text" id="dic_serachbar_element" class="dic_serachbar_element" name="dic_serachbar_element" placeholder="Enter word and 'Hit Enter' "></form>
+`;
+    let searchElement = document.createElement('div');
+    searchElement.classList.add('dic_searchbar_wrap');
+    searchElement.innerHTML = searchBarBody;
+    // Append element to body
+    document.getElementsByTagName('body')[0].appendChild(searchElement);
+    document
+        .querySelector('.dic_searchbar_wrap form')
+        .addEventListener('submit', (e) => {
+            e.preventDefault();
+            let searchInputValue = e.target[
+                'dic_serachbar_element'
+            ].value.trim();
+            variableHelpers.getSelectedTerm = searchInputValue;
+            // Load Ui layout cotainer
+            showDictionaryContainer(variableHelpers.getSelectedTerm);
+            // Empty layout input
+            e.target['dic_serachbar_element'].value = '';
+        });
+};
+
+searchBarUi();
