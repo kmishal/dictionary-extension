@@ -168,7 +168,7 @@ const errorUi = function (errorText) {
 
 // Show default UI to front end
 const searchBarUi = function () {
-    let searchBarBody = `<form><input type="text" id="dic_serachbar_element" class="dic_serachbar_element" name="dic_serachbar_element" placeholder="Enter word and 'Hit Enter' "></form>
+    let searchBarBody = `<form><input type="text" id="dic_serachbar_element" autocomplete="off" class="dic_serachbar_element" name="dic_serachbar_element" placeholder="Enter word and 'Hit Enter' "></form>
 `;
     let searchElement = document.createElement('div');
     searchElement.classList.add('dic_searchbar_wrap');
