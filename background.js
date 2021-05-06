@@ -1,4 +1,4 @@
-// I will be the brain of your extensions
+// I will be the brain of your extension
 let enableExtension = false;
 
 chrome.runtime.onInstalled.addListener(function () {
